@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
 	ifstream file(argv[1]);
 	if (!file.is_open()) {
 		cerr << "Unable to find the file." << endl;
-		exit;
 	}
 
 	string data[MAX_ROWS][MAX_COLS];
@@ -64,12 +63,13 @@ int main(int argc, char* argv[])
 	}
 
 	for (int i = 1; i < row; i++) {
-		cout << i << ". ";
-		stu[i].PrintInfo();
+		list.addtail(new Student[i]);
 	}
 
 	for (int i = 1; i < row; i++) {
-		list.add(new Student(stu[i].last_name, stu[i].first_name, stu[i].fathers_name, stu[i].age, stu[i].gender));
+		cout << i << ". ";
+		cout << stu[i].last_name << " \n";
 	}
+
 	return 0;
 }
