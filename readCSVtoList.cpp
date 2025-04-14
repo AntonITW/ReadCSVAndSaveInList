@@ -20,56 +20,56 @@ int main(int argc, char* argv[])
 	if (!file.is_open()) {
 		cerr << "Unable to find the file." << endl;
 	}
-
-	string data[MAX_ROWS][MAX_COLS];
-	string line;
-	int row = 0;
-	int col = 0;
-	while (getline(file, line) && row < MAX_ROWS) {
-		stringstream ss(line);
-		string cell;
+	else {
+		string data[MAX_ROWS][MAX_COLS];
+		string line;
+		int row = 0;
 		int col = 0;
-		while (getline(ss, cell, ',') && col < MAX_COLS) {
-			data[row][col] = cell;
-			col++;
+		while (getline(file, line) && row < MAX_ROWS) {
+			stringstream ss(line);
+			string cell;
+			int col = 0;
+			while (getline(ss, cell, ',') && col < MAX_COLS) {
+				data[row][col] = cell;
+				col++;
+			}
+			row++;
 		}
-		row++;
-	}
-	file.close();
+		file.close();
 
-	Student* stu = new Student[row];
-	List<Student*> list;
+		Student* stu = new Student[row];
+		List<Student*> list;
 
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < MAX_COLS && !data[i][j].empty();
-			j++) {
-			cout << data[i][j] << " ";
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < MAX_COLS && !data[i][j].empty();
+				j++) {
+				cout << data[i][j] << " ";
+			}
+			cout << endl;
 		}
-		cout << endl;
-	}
 
-	for (int i = 1; i < row; i++) {
-		for (int j = 0; j < MAX_COLS && !data[i][j].empty();
-			j++) {
-			stu[i].last_name = data[i][0];
-			stu[i].first_name = data[i][1];
-			stu[i].fathers_name = data[i][2];
-			stringstream tmp(data[i][3]);
-			int age;
-			tmp >> age;
-			stu[i].age = age;
-			stu[i].gender = data[i][4];
+		for (int i = 1; i < row; i++) {
+			for (int j = 0; j < MAX_COLS && !data[i][j].empty();
+				j++) {
+				stu[i].last_name = data[i][0];
+				stu[i].first_name = data[i][1];
+				stu[i].fathers_name = data[i][2];
+				stringstream tmp(data[i][3]);
+				int age;
+				tmp >> age;
+				stu[i].age = age;
+				stu[i].gender = data[i][4];
+			}
+		}
+
+		for (int i = 1; i < row; i++) {
+			list.addtail(new Student[i]);
+		}
+
+		for (int i = 1; i < row; i++) {
+			cout << i << ". ";
+			cout << stu[i].last_name << " \n";
 		}
 	}
-
-	for (int i = 1; i < row; i++) {
-		list.addtail(new Student[i]);
-	}
-
-	for (int i = 1; i < row; i++) {
-		cout << i << ". ";
-		cout << stu[i].last_name << " \n";
-	}
-
 	return 0;
 }
