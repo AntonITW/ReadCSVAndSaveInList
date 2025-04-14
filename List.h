@@ -2,28 +2,35 @@
 #include <iostream>
 #include <sstream>
 
-template<typename T>
+template<class T>
 class List
 {
-	struct node {
-		T* current;
-		node *next;
+	struct Node {
+		T data;
+		Node* next = nullptr;
+
+		Node(T arg)
+		{
+			data = arg;
+		}
 	};
 public:
-	node st;
-	List() {
-		st = NULL;
-	}
+	Node* tail;
+	Node* head;
+	List() { };
+	void addtail(const T& data) {
 
-	node last;
-	void add(T obj) {
-		if (st == NULL) {
-			st = last;
-			return;
+		const auto newNode = new Node(data);
+
+		if (head == nullptr)
+			head = newNode;
+		else {
+			auto p = head;
+
+			while (p->next != nullptr)
+				p = p->next;
+
+			p->next = newNode;
 		}
-
-		last->next = this->st;
-		last = this->st;
-
 	}
 };
