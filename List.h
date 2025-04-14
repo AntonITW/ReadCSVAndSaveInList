@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sstream>
 
-template<class T>
+template<typename T>
 class List
 {
 	struct node {
